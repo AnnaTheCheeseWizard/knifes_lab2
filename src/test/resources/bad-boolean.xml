@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Knives xmlns="http://lab2.example.com/knives">
+    <Knife id="k001">
+        <Type>knife</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Finland</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">21</Length>
+                <Width unit="mm">20</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>birch</WoodType></Wooden></Handle>
+            <Fuller>maybe</Fuller>
+        </Visual>
+        <Value>false</Value>
+    </Knife>
+</Knives>

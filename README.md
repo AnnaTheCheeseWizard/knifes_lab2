@@ -18,7 +18,7 @@ XSL-перетворення (групування за типом), логув�
 | `ua.lab2.knives.app` | `App` (точка входу), `LoggingConfig` |
 
 ## Запуск
-
+# тести + звіт JaCoCo (target/site/jacoco/index.html)
 ```bash
 mvn test                      # тести + звіт JaCoCo (target/site/jacoco/index.html)
 mvn package
@@ -26,10 +26,3 @@ java -jar target/knives-1.0.0.jar [knives.xml] [knives.xsd] [knives.xsl] [output
 ```
 
 Результат XSL-перетворення за замовчуванням: `output/knives-by-type.xml`; лог: `logs/knives.log`.
-
-## Публікація у віддалений репозиторій
-
-```bash
-git remote add origin <URL вашого репозиторію>
-git push -u origin main
-```

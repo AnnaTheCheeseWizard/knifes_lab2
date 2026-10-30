@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:k="http://lab2.example.com/knives"
+           targetNamespace="http://lab2.example.com/knives"
+           elementFormDefault="qualified">
+
+    <!-- ===================== Simple types ===================== -->
+
+    <!-- Unique identifier of a knife: k001, k002, ... -->
+    <xs:simpleType name="KnifeIdType">
+        <xs:restriction base="xs:ID">
+            <xs:pattern value="k[0-9]{3}"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Type of the cold weapon (enumeration) -->
+    <xs:simpleType name="KnifeKindType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="knife"/>
+            <xs:enumeration value="dagger"/>
+            <xs:enumeration value="saber"/>
+            <xs:enumeration value="sword"/>
+            <xs:enumeration value="machete"/>
+            <xs:enumeration value="bayonet"/>
+            <xs:enumeration value="rapier"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- One-handed or two-handed (enumeration) -->
+    <xs:simpleType name="HandyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="one-handed"/>
+            <xs:enumeration value="two-handed"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Country of origin -->
+    <xs:simpleType name="OriginType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="2"/>
+            <xs:maxLength value="56"/>
+            <xs:pattern value="\p{L}[\p{L} \-]*"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Blade length: 10 .. 150 cm (boundary values) -->
+    <xs:simpleType name="LengthValueType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="10"/>
+            <xs:maxInclusive value="150"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Blade width: 10 .. 100 mm (boundary values) -->
+    <xs:simpleType name="WidthValueType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="10"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="BladeMaterialType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="steel"/>
+            <xs:enumeration value="cast-iron"/>
+            <xs:enumeration value="copper"/>
+            <xs:enumeration value="bronze"/>
+            <xs:enumeration value="damascus-steel"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="WoodType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="oak"/>
+            <xs:enumeration value="beech"/>
+            <xs:enumeration value="ash"/>
+            <xs:enumeration value="walnut"/>
+            <xs:enumeration value="birch"/>
+            <xs:enumeration value="maple"/>
+            <xs:enumeration value="ebony"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- ===================== Complex types ===================== -->
+
+    <!-- Length with a mandatory fixed attribute "unit" -->
+    <xs:complexType name="LengthType">
+        <xs:simpleContent>
+            <xs:extension base="k:LengthValueType">
+                <xs:attribute name="unit" type="xs:string" use="required" fixed="cm"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <!-- Width with a mandatory fixed attribute "unit" -->
+    <xs:complexType name="WidthType">
+        <xs:simpleContent>
+            <xs:extension base="k:WidthValueType">
+                <xs:attribute name="unit" type="xs:string" use="required" fixed="mm"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="BladeType">
+        <xs:sequence>
+            <xs:element name="Length" type="k:LengthType"/>
+            <xs:element name="Width" type="k:WidthType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="EmptyType"/>
+
+    <xs:complexType name="WoodenHandleType">
+        <xs:sequence>
+            <xs:element name="WoodType" type="k:WoodType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <!-- Handle: wooden (wood type is mandatory), plastic or metal -->
+    <xs:complexType name="HandleType">
+        <xs:choice>
+            <xs:element name="Wooden" type="k:WoodenHandleType"/>
+            <xs:element name="Plastic" type="k:EmptyType"/>
+            <xs:element name="Metal" type="k:EmptyType"/>
+        </xs:choice>
+    </xs:complexType>
+
+    <xs:complexType name="VisualType">
+        <xs:sequence>
+            <xs:element name="Blade" type="k:BladeType"/>
+            <xs:element name="BladeMaterial" type="k:BladeMaterialType"/>
+            <xs:element name="Handle" type="k:HandleType"/>
+            <!-- Fuller ("дол"): present or not -->
+            <xs:element name="Fuller" type="xs:boolean"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="KnifeType">
+        <xs:sequence>
+            <xs:element name="Type" type="k:KnifeKindType"/>
+            <xs:element name="Handy" type="k:HandyType"/>
+            <xs:element name="Origin" type="k:OriginType"/>
+            <xs:element name="Visual" type="k:VisualType"/>
+            <!-- Value: true - collectible, false - not collectible -->
+            <xs:element name="Value" type="xs:boolean"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="k:KnifeIdType" use="required"/>
+    </xs:complexType>
+
+    <!-- ===================== Root element ===================== -->
+
+    <xs:element name="Knives">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Knife" type="k:KnifeType" minOccurs="1" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+</xs:schema>

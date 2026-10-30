@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Knives xmlns="http://lab2.example.com/knives"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://lab2.example.com/knives knives.xsd">
+    <Knife id="k001">
+        <Type>knife</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Finland</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">21</Length>
+                <Width unit="mm">20</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>birch</WoodType></Wooden></Handle>
+            <Fuller>false</Fuller>
+        </Visual>
+        <Value>false</Value>
+    </Knife>
+    <Knife id="k002">
+        <Type>dagger</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Italy</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">30</Length>
+                <Width unit="mm">35</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Metal/></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k003">
+        <Type>saber</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Poland</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">85</Length>
+                <Width unit="mm">40</Width>
+            </Blade>
+            <BladeMaterial>damascus-steel</BladeMaterial>
+            <Handle><Wooden><WoodType>walnut</WoodType></Wooden></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k004">
+        <Type>sword</Type>
+        <Handy>two-handed</Handy>
+        <Origin>Germany</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">120</Length>
+                <Width unit="mm">50</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>oak</WoodType></Wooden></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k005">
+        <Type>machete</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Brazil</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">45</Length>
+                <Width unit="mm">55</Width>
+            </Blade>
+            <BladeMaterial>cast-iron</BladeMaterial>
+            <Handle><Plastic/></Handle>
+            <Fuller>false</Fuller>
+        </Visual>
+        <Value>false</Value>
+    </Knife>
+    <Knife id="k006">
+        <Type>bayonet</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Ukraine</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">25</Length>
+                <Width unit="mm">25</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Plastic/></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>false</Value>
+    </Knife>
+    <Knife id="k007">
+        <Type>dagger</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Turkey</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">28</Length>
+                <Width unit="mm">30</Width>
+            </Blade>
+            <BladeMaterial>copper</BladeMaterial>
+            <Handle><Metal/></Handle>
+            <Fuller>false</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k008">
+        <Type>knife</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Japan</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">15</Length>
+                <Width unit="mm">15</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>maple</WoodType></Wooden></Handle>
+            <Fuller>false</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k009">
+        <Type>rapier</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Spain</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">100</Length>
+                <Width unit="mm">20</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Metal/></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k010">
+        <Type>sword</Type>
+        <Handy>two-handed</Handy>
+        <Origin>Scotland</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">110</Length>
+                <Width unit="mm">55</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>ash</WoodType></Wooden></Handle>
+            <Fuller>true</Fuller>
+        </Visual>
+        <Value>true</Value>
+    </Knife>
+    <Knife id="k011">
+        <Type>knife</Type>
+        <Handy>one-handed</Handy>
+        <Origin>Ukraine</Origin>
+        <Visual>
+            <Blade>
+                <Length unit="cm">18</Length>
+                <Width unit="mm">22</Width>
+            </Blade>
+            <BladeMaterial>steel</BladeMaterial>
+            <Handle><Wooden><WoodType>oak</WoodType></Wooden></Handle>
+            <Fuller>false</Fuller>
+        </Visual>
+        <Value>false</Value>
+    </Knife>
+</Knives>

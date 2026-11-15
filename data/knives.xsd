@@ -6,9 +6,9 @@
 
     <!-- ===================== Simple types ===================== -->
 
-    <!-- Unique identifier of a knife: k001, k002, ... -->
+    <!-- Identifier of a knife: k001, k002, ... (uniqueness is enforced by xs:key below) -->
     <xs:simpleType name="KnifeIdType">
-        <xs:restriction base="xs:ID">
+        <xs:restriction base="xs:string">
             <xs:pattern value="k[0-9]{3}"/>
         </xs:restriction>
     </xs:simpleType>
@@ -81,13 +81,26 @@
         </xs:restriction>
     </xs:simpleType>
 
+    <!-- Allowed measurement units -->
+    <xs:simpleType name="LengthUnitType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="cm"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="WidthUnitType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="mm"/>
+        </xs:restriction>
+    </xs:simpleType>
+
     <!-- ===================== Complex types ===================== -->
 
     <!-- Length with a mandatory fixed attribute "unit" -->
     <xs:complexType name="LengthType">
         <xs:simpleContent>
             <xs:extension base="k:LengthValueType">
-                <xs:attribute name="unit" type="xs:string" use="required" fixed="cm"/>
+                <xs:attribute name="unit" type="k:LengthUnitType" use="required" fixed="cm"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
@@ -96,16 +109,16 @@
     <xs:complexType name="WidthType">
         <xs:simpleContent>
             <xs:extension base="k:WidthValueType">
-                <xs:attribute name="unit" type="xs:string" use="required" fixed="mm"/>
+                <xs:attribute name="unit" type="k:WidthUnitType" use="required" fixed="mm"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
 
     <xs:complexType name="BladeType">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Length" type="k:LengthType"/>
             <xs:element name="Width" type="k:WidthType"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
 
     <xs:complexType name="EmptyType"/>
@@ -126,24 +139,24 @@
     </xs:complexType>
 
     <xs:complexType name="VisualType">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Blade" type="k:BladeType"/>
             <xs:element name="BladeMaterial" type="k:BladeMaterialType"/>
             <xs:element name="Handle" type="k:HandleType"/>
             <!-- Fuller ("дол"): present or not -->
             <xs:element name="Fuller" type="xs:boolean"/>
-        </xs:sequence>
+        </xs:all>
     </xs:complexType>
 
     <xs:complexType name="KnifeType">
-        <xs:sequence>
+        <xs:all>
             <xs:element name="Type" type="k:KnifeKindType"/>
             <xs:element name="Handy" type="k:HandyType"/>
             <xs:element name="Origin" type="k:OriginType"/>
             <xs:element name="Visual" type="k:VisualType"/>
             <!-- Value: true - collectible, false - not collectible -->
             <xs:element name="Value" type="xs:boolean"/>
-        </xs:sequence>
+        </xs:all>
         <xs:attribute name="id" type="k:KnifeIdType" use="required"/>
     </xs:complexType>
 
@@ -155,6 +168,11 @@
                 <xs:element name="Knife" type="k:KnifeType" minOccurs="1" maxOccurs="unbounded"/>
             </xs:sequence>
         </xs:complexType>
+        <!-- id must be present and unique among all knives -->
+        <xs:key name="KnifeIdKey">
+            <xs:selector xpath="k:Knife"/>
+            <xs:field xpath="@id"/>
+        </xs:key>
     </xs:element>
 
 </xs:schema>

@@ -23,7 +23,7 @@ public class StaxKnifeParser extends AbstractKnifeParser {
                 switch (reader.next()) {
                     case XMLStreamConstants.START_ELEMENT ->
                             collector.start(reader.getLocalName(),
-                                    reader.getAttributeValue(null, KnifeXml.ID_ATTRIBUTE));
+                                    name -> reader.getAttributeValue(null, name));
                     case XMLStreamConstants.CHARACTERS -> collector.characters(reader.getText());
                     case XMLStreamConstants.END_ELEMENT -> collector.end(reader.getLocalName());
                     default -> {

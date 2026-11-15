@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.stream.XMLStreamException;
@@ -23,11 +25,21 @@ public abstract class AbstractKnifeParser implements KnifeParser {
         LOG.fine(() -> name + ": parsing " + xmlFile);
         try (InputStream in = Files.newInputStream(xmlFile)) {
             List<Knife> knives = doParse(in);
+            checkUniqueIds(knives);
             LOG.info(() -> name + ": parsed " + knives.size() + " knives from " + xmlFile);
             return knives;
         } catch (IOException | SAXException | ParserConfigurationException | XMLStreamException
                  | IllegalArgumentException | IllegalStateException e) {
             throw new KnifeException(name + " failed to parse " + xmlFile + ": " + e.getMessage(), e);
+        }
+    }
+
+    private static void checkUniqueIds(List<Knife> knives) {
+        Set<String> ids = new HashSet<>();
+        for (Knife knife : knives) {
+            if (!ids.add(knife.id())) {
+                throw new IllegalStateException("Duplicate knife id: " + knife.id());
+            }
         }
     }
 

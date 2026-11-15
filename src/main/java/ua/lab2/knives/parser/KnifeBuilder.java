@@ -62,6 +62,26 @@ public final class KnifeBuilder {
     }
 
     /**
+     * Checks the {@code unit} attribute of a dimension element: {@code Length} must be in
+     * {@code cm} and {@code Width} in {@code mm}. Other elements are ignored.
+     *
+     * @param element local name of the element
+     * @param unit    value of its {@code unit} attribute ({@code null} if absent)
+     * @throws IllegalArgumentException if the unit is missing or not the expected one
+     */
+    public void unit(String element, String unit) {
+        String expected = switch (element) {
+            case "Length" -> "cm";
+            case "Width" -> "mm";
+            default -> null;
+        };
+        if (expected != null && !expected.equals(unit)) {
+            throw new IllegalArgumentException(
+                    element + " must have unit '" + expected + "' but was '" + unit + "'");
+        }
+    }
+
+    /**
      * Builds the knife.
      *
      * @throws IllegalStateException if some mandatory element has not been provided

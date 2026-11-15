@@ -6,6 +6,7 @@ public final class KnifeXml {
     public static final String NAMESPACE = "http://lab2.example.com/knives";
     public static final String KNIFE = "Knife";
     public static final String ID_ATTRIBUTE = "id";
+    public static final String UNIT_ATTRIBUTE = "unit";
 
     private KnifeXml() {
     }

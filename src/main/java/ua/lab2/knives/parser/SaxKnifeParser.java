@@ -30,7 +30,7 @@ public class SaxKnifeParser extends AbstractKnifeParser {
 
         @Override
         public void startElement(String uri, String localName, String qName, Attributes attributes) {
-            collector.start(localName, attributes.getValue(KnifeXml.ID_ATTRIBUTE));
+            collector.start(localName, attributes::getValue);
         }
 
         @Override

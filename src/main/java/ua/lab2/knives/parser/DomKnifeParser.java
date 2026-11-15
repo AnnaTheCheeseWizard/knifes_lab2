@@ -33,17 +33,20 @@ public class DomKnifeParser extends AbstractKnifeParser {
     }
 
     private static Knife readKnife(Element knifeElement) {
-        String id = knifeElement.hasAttribute(KnifeXml.ID_ATTRIBUTE)
-                ? knifeElement.getAttribute(KnifeXml.ID_ATTRIBUTE) : null;
-        KnifeBuilder builder = new KnifeBuilder(id);
+        KnifeBuilder builder = new KnifeBuilder(attribute(knifeElement, KnifeXml.ID_ATTRIBUTE));
         NodeList descendants = knifeElement.getElementsByTagNameNS("*", "*");
         for (int i = 0; i < descendants.getLength(); i++) {
             Element element = (Element) descendants.item(i);
             boolean leaf = element.getElementsByTagNameNS("*", "*").getLength() == 0;
+            builder.unit(element.getLocalName(), attribute(element, KnifeXml.UNIT_ATTRIBUTE));
             if (leaf) {
                 builder.accept(element.getLocalName(), element.getTextContent().trim());
             }
         }
         return builder.build();
+    }
+
+    private static String attribute(Element element, String name) {
+        return element.hasAttribute(name) ? element.getAttribute(name) : null;
     }
 }

@@ -2,6 +2,7 @@ package ua.lab2.knives.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 import ua.lab2.knives.model.Knife;
 
 /**
@@ -14,10 +15,16 @@ public final class KnifeEventCollector {
     private final StringBuilder text = new StringBuilder();
     private KnifeBuilder current;
 
-    public void start(String localName, String idAttribute) {
+    /**
+     * @param localName  local name of the started element
+     * @param attributes lookup of attribute values by name (returns {@code null} if absent)
+     */
+    public void start(String localName, Function<String, String> attributes) {
         text.setLength(0);
         if (KnifeXml.KNIFE.equals(localName)) {
-            current = new KnifeBuilder(idAttribute);
+            current = new KnifeBuilder(attributes.apply(KnifeXml.ID_ATTRIBUTE));
+        } else if (current != null) {
+            current.unit(localName, attributes.apply(KnifeXml.UNIT_ATTRIBUTE));
         }
     }
 

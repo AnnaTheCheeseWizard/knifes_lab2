@@ -88,6 +88,34 @@ abstract class AbstractKnifeParserTest {
     }
 
     @Test
+    void wrongUnitIsReported() {
+        assertThrows(KnifeException.class, () -> parser.parse(TestData.resource("invalid-unit.xml")));
+    }
+
+    @Test
+    void missingUnitIsReported() {
+        assertThrows(KnifeException.class, () -> parser.parse(TestData.resource("missing-unit.xml")));
+    }
+
+    @Test
+    void duplicateIdIsReported() {
+        assertThrows(KnifeException.class, () -> parser.parse(TestData.resource("duplicate-id.xml")));
+    }
+
+    @Test
+    void elementOrderDoesNotMatter() throws KnifeException {
+        List<Knife> knives = parser.parse(TestData.resource("reordered.xml"));
+        assertEquals(1, knives.size());
+        Knife knife = knives.get(0);
+        assertEquals("k002", knife.id());
+        assertEquals("Italy", knife.origin());
+        assertEquals(30, knife.visual().blade().lengthCm());
+        assertEquals(35, knife.visual().blade().widthMm());
+        assertTrue(knife.visual().fuller());
+        assertTrue(knife.collectible());
+    }
+
+    @Test
     void woodenHandleWithoutWoodTypeIsReported() {
         assertThrows(KnifeException.class, () -> parser.parse(TestData.resource("wood-without-type.xml")));
     }

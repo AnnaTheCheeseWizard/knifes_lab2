@@ -41,6 +41,21 @@ class XmlValidatorTest {
     }
 
     @Test
+    void wrongUnitIsInvalid() {
+        assertInvalid("invalid-unit.xml");
+    }
+
+    @Test
+    void missingUnitIsInvalid() {
+        assertInvalid("missing-unit.xml");
+    }
+
+    @Test
+    void elementsInAnyOrderAreValid() {
+        assertDoesNotThrow(() -> XmlValidator.validate(TestData.resource("reordered.xml"), TestData.XSD));
+    }
+
+    @Test
     void duplicateIdIsInvalid() {
         assertInvalid("duplicate-id.xml");
     }

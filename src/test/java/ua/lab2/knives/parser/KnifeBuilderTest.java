@@ -58,6 +58,22 @@ class KnifeBuilderTest {
     }
 
     @Test
+    void correctUnitsAreAccepted() {
+        KnifeBuilder b = new KnifeBuilder("k001");
+        b.unit("Length", "cm");
+        b.unit("Width", "mm");
+        b.unit("Type", null);
+    }
+
+    @Test
+    void wrongOrMissingUnitIsRejected() {
+        KnifeBuilder b = new KnifeBuilder("k001");
+        assertThrows(IllegalArgumentException.class, () -> b.unit("Length", "mm"));
+        assertThrows(IllegalArgumentException.class, () -> b.unit("Width", "cm"));
+        assertThrows(IllegalArgumentException.class, () -> b.unit("Length", null));
+    }
+
+    @Test
     void incompleteKnifeIsRejected() {
         KnifeBuilder b = new KnifeBuilder("k001");
         b.accept("Type", "knife");

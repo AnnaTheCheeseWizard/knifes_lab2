@@ -4,7 +4,7 @@
            targetNamespace="http://lab2.example.com/knives"
            elementFormDefault="qualified">
 
-    <!-- ===================== Simple types ===================== -->
+    <!--Simple types-->
 
     <!-- Identifier of a knife: k001, k002, ... (uniqueness is enforced by xs:key below) -->
     <xs:simpleType name="KnifeIdType">
@@ -94,7 +94,7 @@
         </xs:restriction>
     </xs:simpleType>
 
-    <!-- ===================== Complex types ===================== -->
+    <!-- Complex types-->
 
     <!-- Length with a mandatory fixed attribute "unit" -->
     <xs:complexType name="LengthType">
@@ -160,7 +160,7 @@
         <xs:attribute name="id" type="k:KnifeIdType" use="required"/>
     </xs:complexType>
 
-    <!-- ===================== Root element ===================== -->
+    <!-- Root element-->
 
     <xs:element name="Knives">
         <xs:complexType>
